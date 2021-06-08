@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 BootStrap: debootstrap
-OSVersion: xenial
+OSVersion: bionic
 MirrorURL: http://us.archive.ubuntu.com/ubuntu/
 
 %runscript
@@ -40,9 +40,11 @@ MirrorURL: http://us.archive.ubuntu.com/ubuntu/
     setup/
     
 %post
-    # we need this for add-apt-repository to exist
-    dpkg -i /src/*patric-cli*.deb
-
     # Add Xenial Universe
-    echo "deb http://us.archive.ubuntu.com/ubuntu/ xenial universe" >> /etc/apt/sources.list
+    echo "deb http://us.archive.ubuntu.com/ubuntu/ bionic universe" >> /etc/apt/sources.list
+    apt-get update
+    # we need this for add-apt-repository to exist
+    apt-get install -y javascript-common libalgorithm-c3-perl libanyevent-http-perl libanyevent-perl libapache-logformat-compiler-perl libapp-cmd-perl libappconfig-perl libasync-interrupt-perl libauthen-sasl-saslprep-perl libauthen-scram-perl libb-hooks-endofscope-perl libb-hooks-op-check-perl libbit-vector-perl libboolean-perl libbson-perl libcapture-tiny-perl libcarp-clan-perl libcgi-compile-perl libcgi-emulate-psgi-perl libclass-accessor-lite-perl libclass-c3-perl libclass-c3-xs-perl libclass-data-inheritable-perl libclass-factory-util-perl libclass-inspector-perl libclass-load-perl libclass-load-xs-perl libclass-method-modifiers-perl libclass-singleton-perl libclass-tiny-perl libclass-xsaccessor-perl libcommon-sense-perl libconfig-any-perl libconfig-general-perl libconfig-simple-perl libconfig-tiny-perl libcookie-baker-perl libcpanel-json-xs-perl libcrypt-openssl-bignum-perl libcrypt-openssl-rsa-perl libcrypt-rc4-perl libcrypt-urandom-perl libdancer2-perl libdata-munge-perl libdata-optlist-perl libdata-uuid-perl libdate-calc-perl libdate-calc-xs-perl libdate-manip-perl libdatetime-format-builder-perl libdatetime-format-dateparse-perl libdatetime-format-iso8601-perl libdatetime-format-mysql-perl libdatetime-format-strptime-perl libdatetime-locale-perl libdatetime-perl libdatetime-timezone-perl libdbi-perl libdevel-callchecker-perl libdevel-caller-perl libdevel-globaldestruction-perl libdevel-lexalias-perl libdevel-overloadinfo-perl libdevel-partialdump-perl libdevel-stacktrace-ashtml-perl libdevel-stacktrace-perl libdigest-perl-md5-perl libdist-checkconflicts-perl libdynaloader-functions-perl libemail-date-format-perl libev-perl libeval-closure-perl libexception-class-perl libfcgi-procmanager-perl libfile-homedir-perl libfile-pushd-perl libfile-searchpath-perl libfile-sharedir-perl libfile-slurp-perl libfile-which-perl libfilesys-notify-simple-perl libgetopt-long-descriptive-perl libguard-perl libhash-merge-simple-perl libhash-multivalue-perl libhttp-body-perl libhttp-entity-parser-perl libhttp-headers-fast-perl libhttp-multipartparser-perl libimport-into-perl libio-stringy-perl libio-tiecombine-perl libipc-shareable-perl libjcode-pm-perl libjs-jquery libjson-any-perl libjson-maybexs-perl libjson-perl libjson-rpc-perl libjson-xs-perl liblog-dispatch-perl liblog-log4perl-perl libmail-sendmail-perl libmath-random-isaac-xs-perl libmath-round-perl libmime-lite-perl libmime-types-perl libmodule-implementation-perl libmodule-pluggable-perl libmodule-refresh-perl libmodule-runtime-conflicts-perl libmodule-runtime-perl libmongodb-perl libmoo-perl libmoose-perl libmro-compat-perl libnamespace-autoclean-perl libnamespace-clean-perl libole-storage-lite-perl libpackage-deprecationmanager-perl libpackage-stash-perl libpackage-stash-xs-perl libpadwalker-perl libparams-classify-perl libparams-util-perl libparams-validate-perl libparams-validationcompiler-perl libparse-recdescent-perl libpath-class-perl libpbkdf2-tiny-perl libplack-middleware-fixmissingbodyinredirect-perl libplack-perl libposix-strftime-compiler-perl libreadonly-perl libref-util-perl libref-util-xs-perl libreturn-multilevel-perl librole-tiny-perl librouter-simple-perl libsafe-isa-perl libscope-guard-perl libscope-upper-perl libspecio-perl libspreadsheet-parseexcel-perl libspreadsheet-writeexcel-perl libspreadsheet-xlsx-perl libstream-buffered-perl libstrictures-perl libstring-rewriteprefix-perl libsub-exporter-perl libsub-exporter-progressive-perl libsub-identify-perl libsub-install-perl libsub-quote-perl libsys-hostname-long-perl libtemplate-perl libtemplate-tiny-perl libterm-readkey-perl libtest-sharedfork-perl libtest-tcp-perl libtext-aligner-perl libtext-table-perl libtype-tiny-perl libtype-tiny-xs-perl libtypes-serialiser-perl libunicode-map-perl libunicode-stringprep-perl libvariable-magic-perl libwww-form-urlencoded-perl libwww-form-urlencoded-xs-perl libyaml-perl
+    apt-get -y install /src/*patric-cli*.deb
+
 

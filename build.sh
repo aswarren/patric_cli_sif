@@ -2,12 +2,12 @@
 
 SINGULARITY=${SINGULARITY:-"$(which singularity)"}
 
-if [ ! -e xenial.simg ]; then
-    sudo "${SINGULARITY}" build xenial.simg setup/xenial.def | tee xenial.simg.log
+if [ ! -e bionic.simg ]; then
+    sudo "${SINGULARITY}" build bionic.simg setup/bionic.def | tee bionic.simg.log
 fi
 
 if [ ! -d patric_cli ]; then
-    sudo "${SINGULARITY}" build --sandbox patric_cli xenial.simg
+    sudo "${SINGULARITY}" build --sandbox patric_cli bionic.simg
     sudo "${SINGULARITY}" build --sandbox patric_cli setup/patric_cli.def | tee patric_cli.log 
 fi
 

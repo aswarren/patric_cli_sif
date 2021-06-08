@@ -16,9 +16,4 @@ To create a singularity image run:
     singularity instance.stop %INSTANCE%"
 ```
 
-## TODO
-* Overlay Postgres Database and LabKey Data to work with a readonly image
-* Add optinal requirements of LabKey
-* Configure SMTP
-
 
