@@ -1,4 +1,4 @@
-# iSentry LabKey
+# PATRIC CLI Singularity image 
 
 ## Build
 To create a singularity image run:
