@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+BootStrap: debootstrap
+OSVersion: xenial
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+%runscript
+
+%startscript
+
+%setup
+
+%files
+    
+%post
+
+%environment

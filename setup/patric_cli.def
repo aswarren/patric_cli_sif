@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+BootStrap: debootstrap
+OSVersion: xenial
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+
+%runscript
+    # This is what happens when you run the container
+    echo "This container provides a service instance."
+    echo "Starting an instance:"
+    echo "    singularity instance.start %IMAGE%  %INSTANCE%"
+    echo "Stopping an instance:"
+    echo "    singularity instance.stop %INSTANCE%"
+
+%startscript
+    # Start a service instance
+    service postgresql start
+    "${CATALINA_HOME}/bin/setclasspath.sh"
+    "${CATALINA_HOME}/bin/startup.sh"
+
+%setup
+    # This section creates a bunch of directories so that they can be referred
+    # to in the post section
+    # Download binary packages required for the installation
+    [ -e ${SINGULARITY_ROOTFS}/src ] || mkdir ${SINGULARITY_ROOTFS}/src
+    
+    cd setup
+
+    # patric 
+    [ -e patric-cli*.deb ] || \
+	curl -s https://api.github.com/repos/PATRIC3/PATRIC-distribution/releases/latest \
+	  | grep browser_download_url \
+	  | grep deb \
+	  | cut -d '"' -f 4 \
+	  | wget -qi -
+
+    cd ..
+
+%files
+    setup/patric-cli*.deb /src
+    setup/
+    
+%post
+    # we need this for add-apt-repository to exist
+    dpkg -i /src/*patric-cli*.deb
+
+    # Add Xenial Universe
+    echo "deb http://us.archive.ubuntu.com/ubuntu/ xenial universe" >> /etc/apt/sources.list
+
